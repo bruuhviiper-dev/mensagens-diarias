@@ -18,6 +18,7 @@ class AppState extends ChangeNotifier {
   static const _kSubscriptions = 'subscriptions';
   static const _kPalette = 'palette_id';
   static const _kTempThemes = 'temp_themes_until';
+  static const _kSignature = 'custom_signature';
 
   static const String pRemoveAds = 'remove_ads';
   static const String pWatermark = 'remove_watermark';
@@ -30,6 +31,16 @@ class AppState extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
   String _paletteId = 'classico';
   DateTime? _tempThemesUntil;
+  String _customSignature = '';
+
+  // ----- assinatura personalizada (premium) -----
+  String get customSignature => _customSignature;
+
+  void setCustomSignature(String value) {
+    _customSignature = value.trim();
+    _prefs.setString(_kSignature, _customSignature);
+    notifyListeners();
+  }
 
   // ----- básico -----
   Set<String> get favorites => Set.unmodifiable(_favorites);
@@ -86,6 +97,7 @@ class AppState extends ChangeNotifier {
     final ttu = _prefs.getInt(_kTempThemes);
     _tempThemesUntil =
         ttu != null ? DateTime.fromMillisecondsSinceEpoch(ttu) : null;
+    _customSignature = _prefs.getString(_kSignature) ?? '';
   }
 
   void toggleFavorite(String id) {
