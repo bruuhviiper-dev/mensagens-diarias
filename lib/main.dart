@@ -6,6 +6,7 @@ import 'data/app_theme.dart';
 import 'screens/create_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/more_screen.dart';
 import 'services/app_state.dart';
 import 'services/purchase_service.dart';
 import 'widgets/banner_ad.dart';
@@ -58,7 +59,12 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    const pages = [HomeScreen(), CreateScreen(), FavoritesScreen()];
+    const pages = [
+      HomeScreen(),
+      CreateScreen(),
+      FavoritesScreen(),
+      MoreScreen()
+    ];
     return Scaffold(
       body: Column(
         children: [
@@ -82,6 +88,10 @@ class _HomeShellState extends State<HomeShell> {
               icon: Icon(Icons.favorite_border_rounded),
               selectedIcon: Icon(Icons.favorite_rounded),
               label: 'Favoritos'),
+          NavigationDestination(
+              icon: Icon(Icons.more_horiz_rounded),
+              selectedIcon: Icon(Icons.more_horiz_rounded),
+              label: 'Mais'),
         ],
       ),
     );
