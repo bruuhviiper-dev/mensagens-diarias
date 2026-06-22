@@ -7,6 +7,7 @@ import 'screens/create_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/more_screen.dart';
+import 'services/ads_service.dart';
 import 'services/app_state.dart';
 import 'services/purchase_service.dart';
 import 'widgets/banner_ad.dart';
@@ -15,6 +16,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final appState = AppState(prefs);
+
+  AdsService.instance.init();
 
   PurchaseService.instance
     ..onEntitlement(appState.grantEntitlement)
